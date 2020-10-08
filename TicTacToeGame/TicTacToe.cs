@@ -6,7 +6,8 @@ namespace TicTacToeGame
 {
     class TicTacToe
     {
-
+        public static char playerChar;
+        public static char computerChar;
         /// <summary>
         /// Boards the specified board positions.
         /// </summary>
@@ -20,6 +21,36 @@ namespace TicTacToeGame
             Console.WriteLine($"{boardPositions[4]} | {boardPositions[5]} | { boardPositions[6]}");
             Console.WriteLine("__|___|__");
             Console.WriteLine($"{boardPositions[7]} | {boardPositions[8]} | { boardPositions[9]}");
+        }
+        public static void ChoosingCharacter()
+        {
+            Console.WriteLine("Please enter a character (X or O) to play");
+            char characterToPlay = Convert.ToChar(Console.ReadLine());
+            while (true)
+            {
+                if (characterToPlay != 'X' && characterToPlay != 'O')
+                {
+                    Console.WriteLine("you entered wrong character, please enter again");
+                    characterToPlay = Convert.ToChar(Console.ReadLine());
+                }
+                else
+                {
+                    if (characterToPlay == 'X')
+                    {
+                        playerChar = characterToPlay;
+                        computerChar = 'O';
+                        break;
+                    }
+                    else
+                    {
+                        playerChar = 'O';
+                        computerChar = 'X';
+                        break;
+
+                    }
+                }
+            }
+
         }
 
     }
