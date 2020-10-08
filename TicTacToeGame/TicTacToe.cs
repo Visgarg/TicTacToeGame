@@ -84,7 +84,7 @@ namespace TicTacToeGame
         /// <param name="choosingCharacter">The choosing character.</param>
         public static void MarkingPositions(char[] boardPositions, char[] choosingCharacter)
         {
-            int index = 0;
+            int index = TicTacToe.TossForGame();
             do
             {
                switch(index%2)
@@ -115,7 +115,7 @@ namespace TicTacToeGame
                                 Console.WriteLine("Please enter the correct position to fill");
                             }
                         }
-                            break;
+                        break;
                     }
                     case 1:
                     {
@@ -125,16 +125,16 @@ namespace TicTacToeGame
                         {
                                 int positionEnteredByCpu = random.Next(1, 10);
                                 if (positionEnteredByCpu <= 9 && positionEnteredByCpu >= 1)
-                            {
-                                if (boardPositions[positionEnteredByCpu] == ' ')
                                 {
-                                    boardPositions[positionEnteredByCpu] = choosingCharacter[index % 2];
-                                    TicTacToe.Board(boardPositions);
-                                    break;
+                                    if (boardPositions[positionEnteredByCpu] == ' ')
+                                    {
+                                        boardPositions[positionEnteredByCpu] = choosingCharacter[index % 2];
+                                        TicTacToe.Board(boardPositions);
+                                        break;
+                                    }
                                 }
-                            }
                         }
-                            break;
+                        break;
                    
                     }
                     default:
@@ -143,6 +143,13 @@ namespace TicTacToeGame
                }
                 index++;
             } while (boardPositions[1]==' ' || boardPositions[2] == ' ' || boardPositions[3] == ' ' || boardPositions[4] == ' ' || boardPositions[5] == ' ' || boardPositions[6] == ' ' || boardPositions[7]  == ' ' || boardPositions[8] == ' ' || boardPositions[9] == ' ');
+        }
+        public static int TossForGame()
+        {
+            //creating the method for having a toss using random function.
+            Random random = new Random();
+            int index = random.Next(0,2);
+            return index;
         }
         }
     }
