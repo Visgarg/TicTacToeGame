@@ -82,32 +82,68 @@ namespace TicTacToeGame
         /// </summary>
         /// <param name="boardPositions">The board positions.</param>
         /// <param name="choosingCharacter">The choosing character.</param>
-        public static void UserMove(char[] boardPositions, char[] choosingCharacter)
+        public static void MarkingPositions(char[] boardPositions, char[] choosingCharacter)
         {
-            Console.WriteLine("Please enter the position between 1 to 9 where you want to fill your character");
-            while (true)
+            int index = 0;
+            do
             {
-
-                int positionEnteredByUser = Convert.ToInt32(Console.ReadLine());
-                if (positionEnteredByUser <= 9 && positionEnteredByUser >= 1)
+               switch(index%2)
                 {
-                    if (boardPositions[positionEnteredByUser] == ' ')
+                    case 0:
                     {
-                        boardPositions[positionEnteredByUser] = choosingCharacter[0];
-                        TicTacToe.Board(boardPositions);
+                        Console.WriteLine("Please enter the position between 1 to 9 where you want to fill your character");
+                        while (true)
+                        {
+
+                            int positionEnteredByUser = Convert.ToInt32(Console.ReadLine());
+                            if (positionEnteredByUser <= 9 && positionEnteredByUser >= 1)
+                            {
+                                if (boardPositions[positionEnteredByUser] == ' ')
+                                {
+                                    boardPositions[positionEnteredByUser] = choosingCharacter[index % 2];
+                                    TicTacToe.Board(boardPositions);
+                                    break;
+                                }
+                                else
+                                {
+                                Console.WriteLine("The position is already occupied, please enter position again");
+                                }
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please enter the correct position to fill");
+                            }
+                        }
+                            break;
+                    }
+                    case 1:
+                    {
+                        Random random = new Random();
+                        
+                        while (true)
+                        {
+                                int positionEnteredByCpu = random.Next(1, 10);
+                                if (positionEnteredByCpu <= 9 && positionEnteredByCpu >= 1)
+                            {
+                                if (boardPositions[positionEnteredByCpu] == ' ')
+                                {
+                                    boardPositions[positionEnteredByCpu] = choosingCharacter[index % 2];
+                                    TicTacToe.Board(boardPositions);
+                                    break;
+                                }
+                            }
+                        }
+                            break;
+                   
+                    }
+                    default:
                         break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("The position is already occupied, please enter position again");
-                    }
 
-                }
-                else
-                {
-                    Console.WriteLine("Please enter the correct position to fill");
-                }
-            }
+               }
+                index++;
+            } while (boardPositions[1]==' ' || boardPositions[2] == ' ' || boardPositions[3] == ' ' || boardPositions[4] == ' ' || boardPositions[5] == ' ' || boardPositions[6] == ' ' || boardPositions[7]  == ' ' || boardPositions[8] == ' ' || boardPositions[9] == ' ');
+        }
         }
     }
-}
+

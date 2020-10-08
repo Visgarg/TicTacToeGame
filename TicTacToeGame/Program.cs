@@ -20,7 +20,7 @@ namespace TicTacToeGame
             //displaying the board.
             TicTacToe.Board(boardPositions);
             //filling the values
-            TicTacToe.UserMove(boardPositions, charactersArray);
+            TicTacToe.MarkingPositions(boardPositions, charactersArray);
         }
 
       
