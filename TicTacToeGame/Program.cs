@@ -10,11 +10,13 @@ namespace TicTacToeGame
         /// </summary>
         static void Main()
         {
+            char[] charactersArray = new char[2];
             Console.WriteLine("Welocome to TicTacToe Game");
             CreatingBoard();
-            TicTacToe ticTacToe = new TicTacToe();
-            TicTacToe.Board(board);
-            TicTacToe.ChoosingCharacter();
+            //TicTacToe.Board(board);
+            charactersArray= TicTacToe.ChoosingCharacter();
+            Console.WriteLine($"you will play with :{charactersArray[0]}");
+            Console.WriteLine($"CPU will play with :{charactersArray[1]}");
         }
         /// <summary>
         /// Creatings the array of positions to be entered into array.
