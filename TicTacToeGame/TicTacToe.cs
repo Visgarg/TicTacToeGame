@@ -146,6 +146,7 @@ namespace TicTacToeGame
         }
         public static int TossForGame()
         {
+            //creating the method for having a toss using random function.
             Random random = new Random();
             int index = random.Next(0,2);
             return index;
