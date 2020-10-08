@@ -120,23 +120,8 @@ namespace TicTacToeGame
                         }
                     case 1:
                         {
-                            Random random = new Random();
-
-                            while (true)
-                            {
-                                int positionEnteredByCpu = random.Next(1, 10);
-                                if (positionEnteredByCpu <= 9 && positionEnteredByCpu >= 1)
-                                {
-                                    if (boardPositions[positionEnteredByCpu] == ' ')
-                                    {
-                                        boardPositions[positionEnteredByCpu] = choosingCharacter[index % 2];
-                                        TicTacToe.Board(boardPositions);
-                                        break;
-                                    }
-                                }
-                            }
+                            TicTacToe.CpuMoveForWinning(boardPositions, choosingCharacter, index);
                             break;
-
                         }
                     default:
                         break;
@@ -144,9 +129,9 @@ namespace TicTacToeGame
                 }
                
                 checkForWin = TicTacToe.CheckingForWinning(boardPositions);
-                if(checkForWin==0)
+                if (checkForWin == 0)
                 {
-                    if(index%2==0)
+                    if (index % 2 == 0)
                     {
                         Console.WriteLine("You have won the game");
                     }
@@ -235,6 +220,22 @@ namespace TicTacToeGame
             else
             {
                 return -1;
+            }
+        }
+        public static void CpuMoveForWinning(char[] boardPositions, char[] choosingCharacter, int index)
+        {
+            Random random = new Random();
+            List<int> CpuPositionsList = new List<int>();
+            while (true)
+            {
+                int positionEnteredByCpu = random.Next(1, 10);
+                if (boardPositions[positionEnteredByCpu] == ' ')
+                {
+                    CpuPositionsList.Add(positionEnteredByCpu);
+                    boardPositions[positionEnteredByCpu] = choosingCharacter[index % 2];
+                    TicTacToe.Board(boardPositions);
+                    break;
+                }
             }
         }
     }
