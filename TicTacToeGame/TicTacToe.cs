@@ -6,29 +6,41 @@ namespace TicTacToeGame
 {
     class TicTacToe
     {
+        public static char[] board = new char[10];
         public static char playerChar;
         public static char computerChar;
-        /// <summary>
-        /// Boards the specified board positions.
-        /// </summary>
-        /// <param name="boardPositions">The board positions is a character array</param>
 
-        
+        /// <summary>
+        /// Creatings the array of positions to be entered into array.
+        /// </summary>
+        /// <returns> empty positions for board in array</returns>
+        public static char[] CreatingBoard()
+        {
+            for (int k = 0; k < board.Length; k++)
+            {
+                board[k] = ' ';
+            }
+            return board;
+        }
+        /// <summary>
+        /// Choosings the character.
+        /// </summary>
+        /// <returns>characters of player and cpu in array.</returns>
         public static char[] ChoosingCharacter()
         {
             Console.WriteLine("Please enter a character (X or O) to play");
             char[] arrayOfCharacters = new char[2];
-            char characterToPlay = Convert.ToChar(Console.ReadLine());
+            char characterToPlay = Convert.ToChar(Console.ReadLine().ToUpper());
             while (true)
             {
-                if (characterToPlay != 'X' && characterToPlay != 'O' && characterToPlay!='x' && characterToPlay !='o')
+                if (characterToPlay != 'X' && characterToPlay != 'O')
                 {
                     Console.WriteLine("you entered wrong character, please enter again");
                     characterToPlay = Convert.ToChar(Console.ReadLine());
                 }
                 else
                 {
-                    if (characterToPlay == 'X' || characterToPlay=='x')
+                    if (characterToPlay == 'X')
                     {
                         playerChar = 'X';
                         Console.WriteLine("Character has been accepted");
@@ -51,6 +63,10 @@ namespace TicTacToeGame
             return arrayOfCharacters;
 
         }
+        /// <summary>
+        /// Boards the specified board positions.
+        /// </summary>
+        /// <param name="boardPositions">The board positions is a character array</param>
         public static void Board(char[] boardPositions)
         {
             // this method posts the board.
@@ -61,6 +77,37 @@ namespace TicTacToeGame
             Console.WriteLine("__|___|__");
             Console.WriteLine($"{boardPositions[7]} | {boardPositions[8]} | { boardPositions[9]}");
         }
+        /// <summary>
+        /// The position is entered by user and displayed in board.
+        /// </summary>
+        /// <param name="boardPositions">The board positions.</param>
+        /// <param name="choosingCharacter">The choosing character.</param>
+        public static void UserMove(char[] boardPositions, char[] choosingCharacter)
+        {
+            Console.WriteLine("Please enter the position between 1 to 9 where you want to fill your character");
+            while (true)
+            {
 
+                int positionEnteredByUser = Convert.ToInt32(Console.ReadLine());
+                if (positionEnteredByUser <= 9 && positionEnteredByUser >= 1)
+                {
+                    if (boardPositions[positionEnteredByUser] == ' ')
+                    {
+                        boardPositions[positionEnteredByUser] = choosingCharacter[0];
+                        TicTacToe.Board(boardPositions);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The position is already occupied, please enter position again");
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Please enter the correct position to fill");
+                }
+            }
+        }
     }
 }
