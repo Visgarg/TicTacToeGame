@@ -11,6 +11,8 @@ namespace TicTacToeGame
         static void Main()
         {
             Console.WriteLine("Welocome to TicTacToe Game");
+            //Toss to decide, who will move, either computer or user.
+            int tossResult = TicTacToe.TossForGame();
             //Array created for board positions
             char[] boardPositions= TicTacToe.CreatingBoard();
             //choosing character for player
@@ -20,7 +22,7 @@ namespace TicTacToeGame
             //displaying the board.
             TicTacToe.Board(boardPositions);
             //filling the values
-            TicTacToe.MarkingPositions(boardPositions, charactersArray);
+            TicTacToe.MarkingPositions(boardPositions, charactersArray, tossResult);
         }
 
       
