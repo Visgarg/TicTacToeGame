@@ -255,7 +255,19 @@ namespace TicTacToeGame
                     boardPositions[i] = ' ';
                 }
             }
-
+            for (int j = 1; j <= 9; j++)
+            {
+                if (boardPositions[j] == ' ')
+                {
+                    boardPositions[j] = choosingCharacter[0];
+                    if (TicTacToe.CheckingForWinning(boardPositions) == 0)
+                    {
+                        boardPositions[j] = ' ';
+                        return j;
+                    }
+                    boardPositions[j] = ' ';
+                }
+            }
             return 0;
 
         }
