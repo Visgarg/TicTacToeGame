@@ -120,7 +120,7 @@ namespace TicTacToeGame
                         }
                     case 1:
                         {
-                            TicTacToe.CpuMoveForWinning(boardPositions, choosingCharacter, index);
+                            TicTacToe.CpuMove(boardPositions, choosingCharacter, index);
                             break;
                         }
                     default:
@@ -164,51 +164,44 @@ namespace TicTacToeGame
             //checking for horizontal positions
             if(winningPositions[1]==winningPositions[2] && winningPositions[2]==winningPositions[3] && winningPositions[1] !=' '&& winningPositions[2] != ' ' && winningPositions[3] != ' ')
             {
-                Console.WriteLine("Game over");
                 return 0;
 
             }
             else if (winningPositions[4] == winningPositions[5] && winningPositions[5] == winningPositions[6] && winningPositions[4] != ' ' && winningPositions[5] != ' ' && winningPositions[6] != ' ')
             {
-                Console.WriteLine("Game over");
                 return 0;
 
             }
             else if (winningPositions[7] == winningPositions[8] && winningPositions[8] == winningPositions[9] && winningPositions[7] != ' ' && winningPositions[8] != ' ' && winningPositions[9] != ' ')
             {
-                Console.WriteLine("Game over");
                 return 0;
 
             }
             //checking for vertical positions
             else if (winningPositions[1] == winningPositions[4] && winningPositions[4] == winningPositions[7] && winningPositions[1] != ' ' && winningPositions[4] != ' ' && winningPositions[7] != ' ')
             {
-                Console.WriteLine("Game over");
                 return 0;
 
             }
             else if (winningPositions[2] == winningPositions[5] && winningPositions[5] == winningPositions[8] && winningPositions[2] != ' ' && winningPositions[5] != ' ' && winningPositions[8] != ' ')
             {
-                Console.WriteLine("Game over");
                 return 0;
+
 
             }
             else if (winningPositions[3] == winningPositions[6] && winningPositions[6] == winningPositions[9] && winningPositions[3] != ' ' && winningPositions[6] != ' ' && winningPositions[9] != ' ')
             {
-                Console.WriteLine("Game over");
                 return 0;
 
             }
             //checking for diogonal positions
             else if (winningPositions[1] == winningPositions[5] && winningPositions[5] == winningPositions[9] && winningPositions[1] != ' ' && winningPositions[5] != ' ' && winningPositions[9] != ' ')
             {
-                Console.WriteLine("Game over");
                 return 0;
 
             }
             else if (winningPositions[3] == winningPositions[5] && winningPositions[5] == winningPositions[7] && winningPositions[3] != ' ' && winningPositions[5] != ' ' && winningPositions[7] != ' ')
             {
-                Console.WriteLine("Game over");
                 return 0;
 
             }
@@ -222,13 +215,22 @@ namespace TicTacToeGame
                 return -1;
             }
         }
-        public static void CpuMoveForWinning(char[] boardPositions, char[] choosingCharacter, int index)
+        public static void CpuMove(char[] boardPositions, char[] choosingCharacter, int index)
         {
             Random random = new Random();
             List<int> CpuPositionsList = new List<int>();
             while (true)
             {
-                int positionEnteredByCpu = random.Next(1, 10);
+                int positionEnteredByCpu;
+                int positionForWinning = CpuMoveForWinning(boardPositions, choosingCharacter);
+                if (positionForWinning == 0)
+                {
+                    positionEnteredByCpu = random.Next(1, 10);
+                }
+                else
+                {
+                    positionEnteredByCpu = positionForWinning;
+                }
                 if (boardPositions[positionEnteredByCpu] == ' ')
                 {
                     CpuPositionsList.Add(positionEnteredByCpu);
@@ -237,6 +239,25 @@ namespace TicTacToeGame
                     break;
                 }
             }
+        }
+        public static int CpuMoveForWinning(char[] boardPositions, char[] choosingCharacter)
+        {
+            for (int i= 1;i<= 9;i++)
+            {
+                if(boardPositions[i]==' ')
+                {
+                    boardPositions[i] = choosingCharacter[1];
+                    if(TicTacToe.CheckingForWinning(boardPositions)==0)
+                    {
+                        boardPositions[i] = ' ';
+                        return i;
+                    }
+                    boardPositions[i] = ' ';
+                }
+            }
+
+            return 0;
+
         }
     }
 }
