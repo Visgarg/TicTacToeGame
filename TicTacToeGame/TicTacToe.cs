@@ -218,14 +218,14 @@ namespace TicTacToeGame
         public static void CpuMove(char[] boardPositions, char[] choosingCharacter, int index)
         {
             Random random = new Random();
-            List<int> CpuPositionsList = new List<int>();
+         
             while (true)
             {
                 int positionEnteredByCpu;
                 int positionForWinning = CpuMoveForWinning(boardPositions, choosingCharacter);
                 if (positionForWinning == 0)
                 {
-                    positionEnteredByCpu = random.Next(1, 10);
+                    positionEnteredByCpu = TicTacToe.FillingVoidPositionByCpu(boardPositions);
                 }
                 else
                 {
@@ -233,7 +233,6 @@ namespace TicTacToeGame
                 }
                 if (boardPositions[positionEnteredByCpu] == ' ')
                 {
-                    CpuPositionsList.Add(positionEnteredByCpu);
                     boardPositions[positionEnteredByCpu] = choosingCharacter[index % 2];
                     TicTacToe.Board(boardPositions);
                     break;
@@ -268,7 +267,33 @@ namespace TicTacToeGame
                     boardPositions[j] = ' ';
                 }
             }
+           
             return 0;
+
+        }
+        public static int FillingVoidPositionByCpu(char[] boardPositions)
+        {
+            List<int> CpuPositionsList = new List<int>();
+            for (int k = 1; k <= 9; k += 2)
+            {
+               
+                if (k == 5)
+                    continue;
+                if (boardPositions[k] == ' ')
+                {
+                    CpuPositionsList.Add(k);
+                }
+            }
+            Random random = new Random();
+            if (CpuPositionsList.Count > 0)
+            {
+                int SelectedIndexFromList = random.Next(CpuPositionsList.Count);
+                return CpuPositionsList[SelectedIndexFromList];
+            }
+            else
+            {
+                return random.Next(1, 9);
+            }
 
         }
     }
