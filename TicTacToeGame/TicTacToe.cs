@@ -217,7 +217,6 @@ namespace TicTacToeGame
         }
         public static void CpuMove(char[] boardPositions, char[] choosingCharacter, int index)
         {
-            Random random = new Random();
          
             while (true)
             {
@@ -290,6 +289,8 @@ namespace TicTacToeGame
                 int SelectedIndexFromList = random.Next(CpuPositionsList.Count);
                 return CpuPositionsList[SelectedIndexFromList];
             }
+            else if (boardPositions[5] == ' ')
+                return 5;
             else
             {
                 return random.Next(1, 9);
